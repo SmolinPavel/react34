@@ -1,30 +1,44 @@
+import { Input } from '@material-ui/core';
+
 import logo from './logo.svg';
 import './App.css';
 
-import { Title } from './Title';
+import { products } from 'api/products.json';
+import { Button } from 'components/Button';
+import { Title } from 'components/Title';
 
-function App({ test }) {
+function App() {
   return (
-    <>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <Title test>34</Title>
-          {[1, 1, 1, 1, 1].map((number, idx) => (
-            <span key={idx}>{number}</span>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <Title color="blue" bordered>
+          34
+        </Title>
+        {/* <ul>
+          {products.map((product) => (
+            <li key={product.id} style={{ color: 'black' }}>
+              {product.name}{' '}
+              <img
+                width="200"
+                style={{ borderRadius: '50%' }}
+                src={product.image}
+                alt={product.name}
+              />
+            </li>
           ))}
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-      <div>test</div>
-    </>
+        </ul> */}
+
+        <div>
+          <Button onClick={() => console.log('click')} color="blue" primary>
+            Primary
+          </Button>
+        </div>
+        <div>
+          <Input onChange={(e) => console.log(e.target.value)} />
+        </div>
+      </header>
+    </div>
   );
 }
 

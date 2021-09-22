@@ -1,0 +1,9 @@
+.Title {
+  background-color: pink;
+
+  font-size: 16px;
+}
+
+.Title--bordered {
+  border-radius: 8px;
+}

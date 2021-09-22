@@ -1,0 +1,13 @@
+- defaultProps
+- propTypes
+- .stylelintrc.json
+- jsconfig.json
+- Нормализация стилей:
+  - [PostCSS Normalize](https://create-react-app.dev/docs/adding-css-reset)
+  - [modern-normalize](https://github.com/sindresorhus/modern-normalize)
+- Ванильный CSS и препроцессоры
+- Инлайн стили
+- classnames
+- CSS/SASS-модули
+- CSS in JS
+- Библиотеки компонентов
