@@ -15,19 +15,19 @@ function App() {
         <Title color="blue" bordered>
           34
         </Title>
-        {/* <ul>
+        <ul>
           {products.map((product) => (
             <li key={product.id} style={{ color: 'black' }}>
               {product.name}{' '}
               <img
-                width="200"
+                width="100"
                 style={{ borderRadius: '50%' }}
                 src={product.image}
                 alt={product.name}
               />
             </li>
           ))}
-        </ul> */}
+        </ul>
 
         <div>
           <Button onClick={() => console.log('click')} color="blue" primary>
