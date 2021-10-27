@@ -4,11 +4,12 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
-import { products } from 'api/products.json';
+// import { products } from 'api/products.json';
 import { Button } from 'components/Button';
 import { Title } from 'components/Title';
 import { withDate } from 'components/withDate';
 import { asyncComponent } from 'asyncComponentHOC';
+import { Third } from 'components/Third';
 
 const AsyncExample = asyncComponent({
   loader: () => import('./components/Example'),
@@ -16,6 +17,8 @@ const AsyncExample = asyncComponent({
 });
 
 const ButtonWithDate = withDate(Button);
+
+const isAuthenticated = true;
 
 function App() {
   return (
@@ -42,9 +45,7 @@ function App() {
             <Route path="/second">
               <h1>Second</h1>
             </Route>
-            <Route path="/third">
-              <h1>Third</h1>
-            </Route>
+            <Route path="/third" component={Third} />
             <Route path="/">
               <main>
                 <img src={logo} className="App-logo" alt="logo" />

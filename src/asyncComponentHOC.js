@@ -1,10 +1,6 @@
-import {
-  Component,
-  // useEffect,
-  //  useState
-} from 'react';
+import { Component, useEffect, useState } from 'react';
 
-export const asyncComponent = ({ loader, loading: Loading }) => {
+export const _asyncComponent = ({ loader, loading: Loading }) => {
   return class AsyncComponent extends Component {
     state = {
       component: null,
@@ -18,6 +14,7 @@ export const asyncComponent = ({ loader, loading: Loading }) => {
 
     render() {
       const { component: LoadedComponent } = this.state;
+      console.log(this.state.component);
 
       return LoadedComponent ? (
         <LoadedComponent {...this.props} />
@@ -30,20 +27,22 @@ export const asyncComponent = ({ loader, loading: Loading }) => {
 
 // TODO investigate
 
-// export const asyncComponent = ({ loader, loading: Loading }) => {
-//   return (props) => {
-//     const [component, setComponent] = useState(null);
+export const asyncComponent = ({ loader, loading: Loading }) => {
+  const MyComponent = (props) => {
+    const [ui, setUi] = useState(null);
 
-//     useEffect(() => {
-//       const loadComponent = async () => {
-//         const { default: component } = await loader();
+    useEffect(() => {
+      const loadComponent = async () => {
+        const { default: LoadedComponent } = await loader();
 
-//         setTimeout(() => setComponent(component), 1000);
-//       };
+        setTimeout(() => setUi(<LoadedComponent {...props} />), 2000);
+      };
 
-//       loadComponent();
-//     }, []);
+      loadComponent();
+    }, [props]);
 
-//     return component ? component : <Loading />;
-//   };
-// };
+    return ui || <Loading />;
+  };
+
+  return MyComponent;
+};
