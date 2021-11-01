@@ -1,5 +1,6 @@
 import { Input } from '@material-ui/core';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import logo from './logo.svg';
 import './App.css';
@@ -10,6 +11,9 @@ import { Title } from 'components/Title';
 import { withDate } from 'components/withDate';
 import { asyncComponent } from 'asyncComponentHOC';
 import { Third } from 'components/Third';
+import { FirstPage } from 'pages/FirstPage';
+import { SecondPage } from 'pages/SecondPage';
+import { store } from 'store';
 
 const AsyncExample = asyncComponent({
   loader: () => import('./components/Example'),
@@ -22,55 +26,53 @@ const isAuthenticated = true;
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <header className="App-header">
-          <AsyncExample />
-          <ul>
-            <li>
-              <Link to="/first">First</Link>
-            </li>
-            <li>
-              <Link to="/second">Second</Link>
-            </li>
-            <li>
-              <Link to="/third">Third</Link>
-            </li>
-          </ul>
+    <Provider store={store}>
+      <BrowserRouter>
+        <div className="App">
+          <header className="App-header">
+            <AsyncExample />
+            <ul>
+              <li>
+                <Link to="/first">First</Link>
+              </li>
+              <li>
+                <Link to="/second">Second</Link>
+              </li>
+              <li>
+                <Link to="/third">Third</Link>
+              </li>
+            </ul>
 
-          <Switch>
-            <Route path="/first">
-              <h1>First</h1>
-            </Route>
-            <Route path="/second">
-              <h1>Second</h1>
-            </Route>
-            <Route path="/third" component={Third} />
-            <Route path="/">
-              <main>
-                <img src={logo} className="App-logo" alt="logo" />
-                <Title color="blue" bordered>
-                  34
-                </Title>
+            <Switch>
+              <Route path="/first" component={FirstPage} />
+              <Route path="/second" component={SecondPage} />
+              <Route path="/third" component={Third} />
+              <Route path="/">
+                <main>
+                  <img src={logo} className="App-logo" alt="logo" />
+                  <Title color="blue" bordered>
+                    34
+                  </Title>
 
-                <div>
-                  <ButtonWithDate
-                    onClick={() => console.log('click')}
-                    color="blue"
-                    primary
-                  >
-                    Primary
-                  </ButtonWithDate>
-                </div>
-                <div>
-                  <Input onChange={(e) => console.log(e.target.value)} />
-                </div>
-              </main>
-            </Route>
-          </Switch>
-        </header>
-      </div>
-    </BrowserRouter>
+                  <div>
+                    <ButtonWithDate
+                      onClick={() => console.log('click')}
+                      color="blue"
+                      primary
+                    >
+                      Primary
+                    </ButtonWithDate>
+                  </div>
+                  <div>
+                    <Input onChange={(e) => console.log(e.target.value)} />
+                  </div>
+                </main>
+              </Route>
+            </Switch>
+          </header>
+        </div>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
