@@ -1,23 +1,48 @@
-import { createStore, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import {
+  createSlice,
+  createReducer,
+  configureStore,
+  combineReducers,
+} from '@reduxjs/toolkit';
 
 const initialValueState = {
-  value: 21,
-  nextValue: 3,
+  value: 210,
+  nextValue: 32,
 };
 
-const valueReducer = (state = initialValueState, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return { ...state, value: state.value + action.payload };
+const valueSlice = createSlice({
+  name: 'value',
+  initialState: initialValueState,
+  reducers: {
+    increment(state, action) {
+      state.value += action.payload;
+    },
+    decrement(state, action) {
+      state.value -= action.payload;
+    },
+    clear(state) {
+      state.value = 0;
+    },
+    setValue(state, action) {
+      state.value = action.payload;
+    },
+  },
+});
 
-    case 'DECREMENT':
-      return { ...state, value: state.value - action.payload };
+export const { increment, decrement, clear, setValue } = valueSlice.actions;
 
-    default:
-      return state;
-  }
-};
+// const valueReducer = createReducer(initialValueState, {
+//   [increment]: (state, action) => ({
+//     ...state,
+//     value: state.value + action.payload,
+//   }),
+//   [decrement]: (state, action) => ({
+//     ...state,
+//     value: state.value - action.payload,
+//   }),
+//   [clear]: (state) => ({ ...state, value: 0 }),
+//   [setValue]: (state, action) => ({ ...state, value: action.payload }),
+// });
 
 const initialUsersState = {
   items: [
@@ -29,6 +54,10 @@ const initialUsersState = {
       id: 2,
       name: 'Darina',
     },
+    {
+      id: 3,
+      name: 'Andrei',
+    },
   ],
 };
 
@@ -37,8 +66,10 @@ const usersReducer = (state = initialUsersState) => {
 };
 
 const rootReducer = combineReducers({
-  value: valueReducer,
+  value: valueSlice.reducer,
   users: usersReducer,
 });
 
-export const store = createStore(rootReducer, composeWithDevTools());
+export const store = configureStore({
+  reducer: rootReducer,
+});

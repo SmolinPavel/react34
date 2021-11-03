@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Input } from '@material-ui/core';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -22,9 +23,28 @@ const AsyncExample = asyncComponent({
 
 const ButtonWithDate = withDate(Button);
 
-const isAuthenticated = true;
-
 function App() {
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCards([
+        {
+          id: 1,
+          label: 'Card 1',
+        },
+        {
+          id: 2,
+          label: 'Card 2',
+        },
+      ]);
+    }, 2000);
+  }, []);
+
+  const handleAdd = () => {
+    setCards((prevCards) => [...prevCards, { id: 3, label: 'Card 3' }]);
+  };
+
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -42,6 +62,15 @@ function App() {
                 <Link to="/third">Third</Link>
               </li>
             </ul>
+
+            <ul>
+              {cards.map((card) => (
+                <li key={card.id}>{card.label}</li>
+              ))}
+            </ul>
+            <div>
+              <button onClick={handleAdd}>Add card</button>
+            </div>
 
             <Switch>
               <Route path="/first" component={FirstPage} />
