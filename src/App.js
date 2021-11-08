@@ -15,6 +15,7 @@ import { Third } from 'components/Third';
 import { FirstPage } from 'pages/FirstPage';
 import { SecondPage } from 'pages/SecondPage';
 import { store } from 'store';
+import { Users } from 'components/Users';
 
 const AsyncExample = asyncComponent({
   loader: () => import('./components/Example'),
@@ -61,6 +62,9 @@ function App() {
               <li>
                 <Link to="/third">Third</Link>
               </li>
+              <li>
+                <Link to="/users">Users</Link>
+              </li>
             </ul>
 
             <ul>
@@ -76,6 +80,7 @@ function App() {
               <Route path="/first" component={FirstPage} />
               <Route path="/second" component={SecondPage} />
               <Route path="/third" component={Third} />
+              <Route path="/users" component={Users} />
               <Route path="/">
                 <main>
                   <img src={logo} className="App-logo" alt="logo" />
