@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchUsers } from 'store';
+import { fetchUsers, badUsersSelector, selectFilteredUsers } from 'store/users';
 
 export const Users = () => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users.items);
+  const users = useSelector(selectFilteredUsers);
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
+
+  console.log('render Users');
 
   return (
     <div>

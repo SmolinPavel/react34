@@ -16,31 +16,32 @@ import { FirstPage } from 'pages/FirstPage';
 import { SecondPage } from 'pages/SecondPage';
 import { store } from 'store';
 import { Users } from 'components/Users';
+import { NewUser } from 'components/NewUser';
 
-const AsyncExample = asyncComponent({
-  loader: () => import('./components/Example'),
-  loading: () => <h3>Loading...</h3>,
-});
+// const AsyncExample = asyncComponent({
+//   loader: () => import('./components/Example'),
+//   loading: () => <h3>Loading...</h3>,
+// });
 
 const ButtonWithDate = withDate(Button);
 
 function App() {
   const [cards, setCards] = useState([]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setCards([
-        {
-          id: 1,
-          label: 'Card 1',
-        },
-        {
-          id: 2,
-          label: 'Card 2',
-        },
-      ]);
-    }, 2000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setCards([
+  //       {
+  //         id: 1,
+  //         label: 'Card 1',
+  //       },
+  //       {
+  //         id: 2,
+  //         label: 'Card 2',
+  //       },
+  //     ]);
+  //   }, 2000);
+  // }, []);
 
   const handleAdd = () => {
     setCards((prevCards) => [...prevCards, { id: 3, label: 'Card 3' }]);
@@ -51,7 +52,7 @@ function App() {
       <BrowserRouter>
         <div className="App">
           <header className="App-header">
-            <AsyncExample />
+            {/* <AsyncExample /> */}
             <ul>
               <li>
                 <Link to="/first">First</Link>
@@ -78,9 +79,17 @@ function App() {
 
             <Switch>
               <Route path="/first" component={FirstPage} />
-              <Route path="/second" component={SecondPage} />
+              <Route path="/second/:number" component={SecondPage} />
               <Route path="/third" component={Third} />
-              <Route path="/users" component={Users} />
+              <Route
+                path="/users"
+                component={() => (
+                  <>
+                    <Users />
+                    <NewUser />
+                  </>
+                )}
+              />
               <Route path="/">
                 <main>
                   <img src={logo} className="App-logo" alt="logo" />

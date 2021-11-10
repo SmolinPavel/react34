@@ -1,8 +1,6 @@
 import { connect } from 'react-redux';
 
-import { clear, increment, setValue } from 'store';
-
-const selectValue = (state) => state.value.value;
+import { clear, increment, setValue, selectValue } from 'store/value';
 
 export const FirstPageComponent = ({ value, increment, clear, setValue }) => {
   const handleIncrement = () => {
